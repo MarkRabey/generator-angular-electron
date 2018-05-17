@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Mark Rabey",
+      "authorEmail": "mark@markrabey.com",
+      "authorUrl": "https://markrabey.com"
+    }
+  }
+}
