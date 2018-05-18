@@ -1,0 +1,11 @@
+<% if (props.uikit) { -%>
+/* Import UIkit */
+// Default variables and available mixins
+@import '../../node_modules/uikit/src/scss/variables-theme';
+@import '../../node_modules/uikit/src/scss/mixins-theme';
+
+// Custom mixin overrides
+
+// Import  UIkit
+@import '../../node_modules/uikit/src/scss/uikit-theme';
+<% } -%>
