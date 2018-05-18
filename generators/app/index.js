@@ -2,7 +2,6 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const semver = require('semver');
-const extend = require('deep-extend');
 const kebabCase = require('just-kebab-case');
 
 module.exports = class extends Generator {
@@ -11,7 +10,13 @@ module.exports = class extends Generator {
 
     if (semver.lt(process.version, '8.9.0')) {
       this.log(chalk.yellow('Angular CLI v6 needs NodeJS v8.9 or greater.'));
-      this.log(chalk.yellow(`You are using version ${ process.version  } which is not supported, please upgrade your version of NodeJS.\n`));
+      this.log(
+        chalk.yellow(
+          `You are using version ${
+            process.version
+          } which is not supported, please upgrade your version of NodeJS.\n`
+        )
+      );
       process.exit(-1);
     }
   }
@@ -20,7 +25,7 @@ module.exports = class extends Generator {
     const prompts = [
       {
         type: 'input',
-        name: 'name',
+        name: 'productName',
         when: !this.props.name,
         message: 'Project name:',
         default: 'My Project',
@@ -80,12 +85,13 @@ module.exports = class extends Generator {
         type: 'confirm',
         name: 'uikit',
         message: 'Include UIkit?',
-        default: false, 
-      }
+        default: false,
+      },
     ];
 
     return this.prompt(prompts).then(props => {
       this.props = props;
+      this.props.name = kebabCase(this.props.productName);
     });
   }
 
@@ -121,22 +127,27 @@ module.exports = class extends Generator {
     ];
 
     templatedFiles.forEach(file => {
-      this.fs.copyTpl(
-        this.templatePath(file.src),
-        this.destinationPath(file.dest),
-        { props: this.props }
-      );
+      this.fs.copyTpl(this.templatePath(file.src), this.destinationPath(file.dest), {
+        props: this.props,
+      });
     });
   }
 
   install() {
-    this.log(`\nRunning ${chalk.yellow(`${this.packageManager} install`)}. This might take a couple minutes.`);
+    this.log(
+      `\nRunning ${chalk.yellow(
+        `${this.packageManager} install`
+      )}. This might take a couple minutes.`
+    );
     this.npmInstall(null, { loglevel: 'error' });
   }
 
   end() {
-    this.log('\nInstallation complete. Get started with the following commands:')
-    this.log(`- $ ${chalk.green(`${this.packageManager} start`)}: start dev server with live reload inside your Eletron app.`);
+    this.log('\nInstallation complete. Get started with the following commands:');
+    this.log(
+      `- $ ${chalk.green(
+        `${this.packageManager} start`
+      )}: start dev server with live reload inside your Eletron app.`
+    );
   }
-  
 };
