@@ -1,6 +1,6 @@
 {
   "name": "generator-angular-electron",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Yeoman generator for Electron apps built with Angular",
   "homepage": "",
   "author": {
@@ -8,9 +8,7 @@
     "email": "mark@markrabey.com",
     "url": "https://markrabey.com"
   },
-  "files": [
-    "generators"
-  ],
+  "files": ["generators"],
   "main": "generators/index.js",
   "keywords": [
     "angular",
@@ -53,20 +51,11 @@
     "test": "jest"
   },
   "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "git add"
-    ],
-    "*.json": [
-      "prettier --write",
-      "git add"
-    ]
+    "*.js": ["eslint --fix", "git add"],
+    "*.json": ["prettier --write", "git add"]
   },
   "eslintConfig": {
-    "extends": [
-      "xo",
-      "prettier"
-    ],
+    "extends": ["xo", "prettier"],
     "env": {
       "jest": true,
       "node": true
@@ -82,9 +71,7 @@
         }
       ]
     },
-    "plugins": [
-      "prettier"
-    ]
+    "plugins": ["prettier"]
   },
   "repository": "MarkRabey/generator-angular-electron",
   "license": "MIT"
